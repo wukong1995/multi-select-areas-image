@@ -98,14 +98,14 @@ class MultiSelectArea extends Component {
 
   calcPosOfBox = () => { // set posImg static
     let ref = this.$imgArea
-    const { scrollTop, scrollLeft, posImg} = this.state
+    const { scrollTop, scrollLeft, posImg } = this.state
 
-    posImg.top= ref.getBoundingClientRect().top + scrollTop
-    posImg.left= ref.getBoundingClientRect().left + scrollLeft
+    posImg.top = ref.getBoundingClientRect().top + scrollTop
+    posImg.left = ref.getBoundingClientRect().left + scrollLeft
 
     this.setState({
-      scrollLeft : window.pageXOffset || document.documentElement.scrollLeft,
-      scrollTop : window.pageYOffset || document.documentElement.scrollTop,
+      scrollLeft: window.pageXOffset || document.documentElement.scrollLeft,
+      scrollTop: window.pageYOffset || document.documentElement.scrollTop,
       posImg
     })
   }
@@ -220,127 +220,127 @@ class MultiSelectArea extends Component {
   }
 
   doDrag = (item, type, e) => {
-    const { dragdown, posImg, areas} = this.state
+    const { dragdown, posImg, areas, originImgSize } = this.state
     if (dragdown) {
       switch (type) {
-      case 'w':
-        // fix drag outside box w position
-        if (e.pageX - posImg.left >= 0) {
-          item.width = item.width + item.x - e.pageX + posImg.left
-          item.x = e.pageX - posImg.left
-        }
-        // fix minimum area
-        if (item.width < 10) {
-          item.x = item.x - 10
-          item.width = item.width + 10
-        }
-        break
-      case 'sw':
-        // fix drag outside box sw position
-        if (e.pageX - posImg.left >= 0) {
-          item.width = item.width + item.x - e.pageX + posImg.left
-          item.x = e.pageX - posImg.left
-        }
-        if (e.pageY - posImg.top <= originImgSize.h) {
-          item.height = e.pageY - posImg.top - item.y
-        }
-        // fix minimum area
-        if (item.width < 10) {
-          item.x = item.x - 10
-          item.width = item.width + 10
-        }
-        if (item.height < 10) {
-          item.height = item.height + 10
-        }
-        break
-      case 's':
-        // fix drag outside box s position
-        if (e.pageY - posImg.top <= originImgSize.h) {
-          item.height = e.pageY - posImg.top - item.y
-        }
-        // fix minimum area
-        if (item.height < 10) {
-          item.height = item.height + 10
-        }
-        break
-      case 'se':
-        // fix drag outside box se position
-        if (e.pageX - posImg.left <= originImgSize.w) {
-          item.width = e.pageX - posImg.left - item.x
-        }
-        if (e.pageY - posImg.top <= originImgSize.h) {
-          item.height = e.pageY - posImg.top - item.y
-        }
-        // fix minimum area
-        if (item.width < 10) {
-          item.x = item.x - 10
-          item.width = item.width + 10
-        }
-        if (item.height < 10) {
-          item.height = item.height + 10
-        }
-        break
-      case 'e':
-        // fix drag outside box e position
-        if (e.pageX - posImg.left <= originImgSize.w) {
-          item.width = e.pageX - posImg.left - item.x
-        }
-        // fix minimum area
-        if (item.width < 10) {
-          item.x = item.x - 10
-          item.width = item.width + 10
-        }
-        break
-      case 'ne':
-        // fix drag outside box ne position
-        if (e.pageX - posImg.left <= originImgSize.w) {
-          item.width = e.pageX - posImg.left - item.x
-        }
-        if (e.pageY - posImg.top >= 0) {
-          item.height = item.height + ((item.y + posImg.top) - e.pageY)
-          item.y = e.pageY - posImg.top
-        }
-        // fix minimum area
-        if (item.width < 10) {
-          item.x = item.x - 10
-          item.width = item.width + 10
-        }
-        if (item.height < 10) {
-          item.height = item.height + 10
-        }
-        break
-      case 'n':
-        // fix drag outside box n position
-        if (e.pageY - posImg.top >= 0) {
-          item.height = item.height + ((item.y + posImg.top) - e.pageY)
-          item.y = e.pageY - posImg.top
-        }
-        // fix minimum area
-        if (item.height < 10) {
-          item.height = item.height + 10
-        }
-        break
-      case 'nw':
-        // fix drag outside box nw position
-        if (e.pageY - posImg.top >= 0) {
-          item.height = item.height + ((item.y + posImg.top) - e.pageY)
-          item.y = e.pageY - posImg.top
-        }
-        if (e.pageX - posImg.left >= 0) {
-          item.width = item.width + item.x - e.pageX + posImg.left
-          item.x = e.pageX - posImg.left
-        }
-        // fix minimum area
-        if (item.width < 10) {
-          item.x = item.x - 10
-          item.width = item.width + 10
-        }
-        if (item.height < 10) {
-          item.height = item.height + 10
-        }
-        break
-      default:
-        break
+        case 'w':
+          // fix drag outside box w position
+          if (e.pageX - posImg.left >= 0) {
+            item.width = item.width + item.x - e.pageX + posImg.left
+            item.x = e.pageX - posImg.left
+          }
+          // fix minimum area
+          if (item.width < 10) {
+            item.x = item.x - 10
+            item.width = item.width + 10
+          }
+          break
+        case 'sw':
+          // fix drag outside box sw position
+          if (e.pageX - posImg.left >= 0) {
+            item.width = item.width + item.x - e.pageX + posImg.left
+            item.x = e.pageX - posImg.left
+          }
+          if (e.pageY - posImg.top <= originImgSize.h) {
+            item.height = e.pageY - posImg.top - item.y
+          }
+          // fix minimum area
+          if (item.width < 10) {
+            item.x = item.x - 10
+            item.width = item.width + 10
+          }
+          if (item.height < 10) {
+            item.height = item.height + 10
+          }
+          break
+        case 's':
+          // fix drag outside box s position
+          if (e.pageY - posImg.top <= originImgSize.h) {
+            item.height = e.pageY - posImg.top - item.y
+          }
+          // fix minimum area
+          if (item.height < 10) {
+            item.height = item.height + 10
+          }
+          break
+        case 'se':
+          // fix drag outside box se position
+          if (e.pageX - posImg.left <= originImgSize.w) {
+            item.width = e.pageX - posImg.left - item.x
+          }
+          if (e.pageY - posImg.top <= originImgSize.h) {
+            item.height = e.pageY - posImg.top - item.y
+          }
+          // fix minimum area
+          if (item.width < 10) {
+            item.x = item.x - 10
+            item.width = item.width + 10
+          }
+          if (item.height < 10) {
+            item.height = item.height + 10
+          }
+          break
+        case 'e':
+          // fix drag outside box e position
+          if (e.pageX - posImg.left <= originImgSize.w) {
+            item.width = e.pageX - posImg.left - item.x
+          }
+          // fix minimum area
+          if (item.width < 10) {
+            item.x = item.x - 10
+            item.width = item.width + 10
+          }
+          break
+        case 'ne':
+          // fix drag outside box ne position
+          if (e.pageX - posImg.left <= originImgSize.w) {
+            item.width = e.pageX - posImg.left - item.x
+          }
+          if (e.pageY - posImg.top >= 0) {
+            item.height = item.height + ((item.y + posImg.top) - e.pageY)
+            item.y = e.pageY - posImg.top
+          }
+          // fix minimum area
+          if (item.width < 10) {
+            item.x = item.x - 10
+            item.width = item.width + 10
+          }
+          if (item.height < 10) {
+            item.height = item.height + 10
+          }
+          break
+        case 'n':
+          // fix drag outside box n position
+          if (e.pageY - posImg.top >= 0) {
+            item.height = item.height + ((item.y + posImg.top) - e.pageY)
+            item.y = e.pageY - posImg.top
+          }
+          // fix minimum area
+          if (item.height < 10) {
+            item.height = item.height + 10
+          }
+          break
+        case 'nw':
+          // fix drag outside box nw position
+          if (e.pageY - posImg.top >= 0) {
+            item.height = item.height + ((item.y + posImg.top) - e.pageY)
+            item.y = e.pageY - posImg.top
+          }
+          if (e.pageX - posImg.left >= 0) {
+            item.width = item.width + item.x - e.pageX + posImg.left
+            item.x = e.pageX - posImg.left
+          }
+          // fix minimum area
+          if (item.width < 10) {
+            item.x = item.x - 10
+            item.width = item.width + 10
+          }
+          if (item.height < 10) {
+            item.height = item.height + 10
+          }
+          break
+        default:
+          break
       }
     }
     this.setState({

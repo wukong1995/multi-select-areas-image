@@ -20,12 +20,14 @@ class Resizable extends Component {
     this.props.startDrag()
   }
 
-  doDrag = () => {
-    this.props.doDrag(this.item, this.pos, e);
+  doDrag = (e) => {
+    const { pos } = this.state
+    const { item, doDrag } = this.props
+    doDrag(item, pos, e);
   }
 
   render() {
-    const { item, posImg} = this.props
+    const { item, posImg } = this.props
 
     return (
       <div className="handler">
@@ -34,10 +36,7 @@ class Resizable extends Component {
             <>
               <div className="select-areas-resize-handler w"
                 style={{
-                  opacity: 0.5,
-                  position: 'absolute',
                   cursor: 'w-resize',
-                  display: 'block',
                   left: (item.x + posImg.left - 6) + 'px',
                   top: (item.y + posImg.top + item.height / 2 - 4) + 'px',
                   zIndex: item.z + 10
@@ -45,24 +44,49 @@ class Resizable extends Component {
                 onMouseDown={(e) => { e.stopPropagation(); e.preventDefault(); this.starDrag('w') }}
               />
               <div
+                className="select-areas-resize-handler sw"
+                style={{
+                  cursor: 'sw-resize',
+                  left: (item.x + posImg.left - 4) + 'px',
+                  top: (item.y + posImg.top + item.height - 6) + 'px',
+                  zIndex: item.z + 10
+                }}
                 onMouseDown={(e) => { e.stopPropagation(); e.preventDefault(); this.starDrag('sw') }}
               />
               <div
+                className="select-areas-resize-handler s"
+                style={{
+                  cursor: 's-resize',
+                  left: (item.x + posImg.left + item.width / 2 - 4) + 'px',
+                  top: (item.y + posImg.top + item.height - 6) + 'px',
+                  zIndex: item.z + 10
+                }}
                 onMouseDown={(e) => { e.stopPropagation(); e.preventDefault(); this.starDrag('s') }}
               />
               <div
+                className="select-areas-resize-handler se"
+                style={{
+                  cursor: 'se-resize',
+                  left: (item.x + posImg.left + item.width - 6) + 'px',
+                  top: (item.y + posImg.top + item.height - 6) + 'px',
+                  zIndex: item.z + 10
+                }}
                 onMouseDown={(e) => { e.stopPropagation(); e.preventDefault(); this.starDrag('se') }}
               />
               <div
+                className="select-areas-resize-handler e"
+                style={{
+                  cursor: 'e-resize',
+                  left: (item.x + posImg.left + item.width - 6) + 'px',
+                  top: (item.y + posImg.top + item.height / 2 - 6) + 'px',
+                  zIndex: item.z + 10
+                }}
                 onMouseDown={(e) => { e.stopPropagation(); e.preventDefault(); this.starDrag('e') }}
               />
               <div
                 className="select-areas-resize-handler ne"
                 style={{
-                  opacity: 0.5,
-                  position: 'absolute',
                   cursor: 'ne-resize',
-                  display: 'block',
                   left: (item.x + posImg.left + item.width - 6) + 'px',
                   top: (item.y + posImg.top - 4) + 'px',
                   zIndex: item.z + 10
@@ -72,10 +96,7 @@ class Resizable extends Component {
               <div
                 className="select-areas-resize-handler n"
                 style={{
-                  opacity: 0.5,
-                  position: 'absolute',
                   cursor: 'n-resize',
-                  display: 'block',
                   left: (item.x + posImg.left + item.width / 2 - 4) + 'px',
                   top: (item.y + posImg.top - 4) + 'px',
                   zIndex: item.z + 10
@@ -85,10 +106,7 @@ class Resizable extends Component {
               <div
                 className="select-areas-resize-handler nw"
                 style={{
-                  opacity: 0.5,
-                  position: 'absolute',
                   cursor: 'nw-resize',
-                  display: 'block',
                   left: (item.x + posImg.left - 4) + 'px',
                   top: (item.y + posImg.top - 4) + 'px',
                   zIndex: item.z + 10
